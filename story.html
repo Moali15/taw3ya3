@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قصه</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Play:wght@400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Noto+Sans+Arabic&family=Play:wght@400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <!-- csslink -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/video.css">
+</head>
+<body >
+   <!-- Start Header -->
+   <nav>
+    <div class="header" id="header">
+      <div class="container">
+        <a href="#" class="logo ">وعى .</a>
+        <ul class="main-nav">
+          <li><a href="index.html">الرئيسيه</a></li>
+          <li><a href="about.html">عننا</a></li>
+          <li><a href="article.html">مقالات</a></li>
+          <li><a href="video.html">ارشادات</a></li>
+          <li><a href="story.html">قصه داعمه</a></li>
+          <li><a href="#footer">تواصل معنا</a></li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+    <!-- =========================== -->
+    <section>
+    <h3 class="heading">شاهد ماذا حدث لطفل اصيب بالشلل ف مرحلة الطفولة</h3>
+    <div class="main">
+      <div class="main-video">
+        <div class="video">
+          <video src="videos/دنيا الجزء الاول.mp4" controls  autoplay></video>
+          <h3 class="title">01. الجزء الأول</h3>
+        </div>
+      </div>
+      <div class="video-list">
+        <div class="vid active">
+          <video src="videos/دنيا الجزء الاول.mp4"   ></video>
+          <h3 class="title">
+            01. الجزء الأول
+          </h3>
+        </div>
+        <div class="vid">
+          <video src="videos/دنيا الجزء الثاني.mp4"   ></video>
+          <h3 class="title">02. الجزء الثاني</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- footer start=========== -->
+<footer id="footer" class="py-5 ">
+  <div class="w-50 m-auto d-flex flex-wrap text-center gap-4  justify-content-center align-item-center">
+    <h2 class="">تواصل معنا :</h2>
+  </div>
+  <div class="contact w-100  px-5">
+    <form action="" class="">
+      <div class="d-flex gap-5">
+      <input class="form-control shadow my-3" type="text" name='email' placeholder='الايميل :'>
+      <input class="form-control shadow my-3 " type="number" name='phone' placeholder='الهاتف :'>
+    </div>
+    <textarea class="form-control" name="textarea" rows="3" cols="30" placeholder="رسالتك :"></textarea>
+    </form>
+  </div>
+    <div class="mt-5 footerIcons m-0  w-100 d-flex gap-3 justify-content-center fs-4 text-white">
+      <a href=""><i class="fa-brands fa-facebook"></i></a>
+      <a href=""><i class="fa-brands fa-twitter"></i></a>
+      <a href=""><i class="fa-brands fa-instagram"></i></a>
+      <a href=""><i class="fa-brands fa-snapchat"></i></a>
+      </div>
+  
+  
+</footer>
+<!-- footer end================ -->
+
+</script>
+    <script src="JS/bootstrap.bundle.min.js"></script>
+    <script>
+      let listVideo = document.querySelectorAll('.video-list .vid');
+      let mainVideo = document.querySelector('.main-video video');
+      let title = document.querySelector('.main-video .title');
+    
+      listVideo.forEach(video => {
+        video.onclick = () => {
+          listVideo.forEach(vid => vid.classList.remove('active'));
+          video.classList.add('active');
+          if(video.classList.contains('active')){
+            let src = video.children[0].getAttribute('src');
+            mainVideo.src = src;
+            let text = video.children[1].innerHTML;
+            title.innerHTML=text;
+          };
+        };
+      } );
+    </script>
+
+</body>
+</html>

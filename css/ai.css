@@ -146,3 +146,49 @@ button:hover {
     }
   }
 
+
+/* footer================= */
+footer
+{
+    background-color: #000;
+    direction: rtl;
+}
+footer p
+{
+    color: #FFF
+}
+footer h2
+{
+    color: #FFF;
+}
+footer .fa-facebook:hover
+{
+  color: #2b57b8;
+  transition: all 0.5s;
+}
+footer .fa-twitter:hover
+{
+  color: #21dada;
+  transition: all 0.5s;
+}
+footer .fa-instagram:hover
+{
+  color: #dd2a7b ;
+  transition: all 0.5s;
+}
+footer .fa-snapchat:hover
+{
+  color: #ffff21;
+  transition: all 0.5s;
+}
+footer .form-control
+{
+  background-color: #fff;
+  border-radius: 5px;
+}
+footer .form-control::placeholder
+{
+  color: #000;
+}
+
+/* footer end ========== */

@@ -192,3 +192,11 @@ footer .form-control::placeholder
 }
 
 /* footer end ========== */
+@media only screen and (max-width: 500px)
+{
+  .cont {
+    max-width: 90%;
+  }
+  
+  
+} 

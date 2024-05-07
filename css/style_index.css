@@ -316,8 +316,7 @@ section .btn:hover
 footer
 {
   margin-top:3px;
-  position: absolute;
-  bottom: 0;
+  
 }
   .moving-element2 , .moving-element {
     

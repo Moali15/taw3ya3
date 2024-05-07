@@ -364,6 +364,10 @@ footer .fa-snapchat:hover
   color: #ffff21;
   transition: all 0.5s;
 }
+footer .contact
+{
+  padding: 10px !important;
+}
 footer .form-control
 {
   background-color: #fff;

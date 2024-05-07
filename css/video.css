@@ -238,6 +238,10 @@ footer h2
 {
     color: #FFF;
 }
+footer .contact
+{
+  padding: 10px !important;
+}
 footer .fa-facebook:hover
 {
   color: #2b57b8;

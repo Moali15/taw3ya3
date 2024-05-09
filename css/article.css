@@ -188,11 +188,17 @@ p,button
   gap: 40px;
 }
 .articles .box {
+  
   box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
   background-color: white;
   border-radius: 6px;
   overflow: hidden;
+  font-size: 10px;
   transition: transform var(--main-transition), box-shadow var(--main-transition);
+}
+.articles .box h3
+{
+  font-size: 25px;
 }
 .articles .box:hover {
   transform: translateY(-10px);

@@ -1,40 +1,44 @@
+let text = document.getElementById("txt");
+let submitBtn = document.getElementById("submit");
+let resumeBtn = document.getElementById("resume");
+let pauseBtn = document.getElementById("pause");
+let audioMessage;
 
-document.getElementById('convert-btn').addEventListener('click', () => {
-    const text = document.getElementById('text-to-convert').value.trim();
-    if (text !== '') {
-        // تحويل النص إلى كلام
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ar-SA'; // تحديد اللغة إلى العربية
+submitBtn.addEventListener("click", () => {
+    if ("speechSynthesis" in window) {
+        if (!audioMessage) {
+            audioMessage = new SpeechSynthesisUtterance();
+            audioMessage.lang = 'ar-SA'; // تحديد اللغة إلى العربية
+        }
 
-        // تشغيل الكلام
-        speechSynthesis.speak(utterance);
+        // تحديد النص للكلام
+        audioMessage.text = text.value;
 
-        // تمكين زر التحميل بعد انتهاء الكلام
-        utterance.onend = () => {
-            document.getElementById('download-btn').disabled = false;
-        };
+        // تشغيل النص ككلام
+        window.speechSynthesis.speak(audioMessage);
+
+        // إظهار أزرار الاستئناف والإيقاف المؤقت
+        pauseBtn.style.display = "block";
+        resumeBtn.style.display = "none";
+    } else {
+        alert("Speech Synthesis غير مدعوم في هذا المتصفح");
     }
 });
 
-document.getElementById('download-btn').addEventListener('click', () => {
-    const text = document.getElementById('text-to-convert').value.trim();
-    if (text !== '') {
-        
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ar-SA'; 
-
-        
-        const blob = new Blob([text], { type: 'audio/mpeg' });
-        const url = URL.createObjectURL(blob);
-
-        
-        const audio = document.getElementById('audio');
-        audio.src = url;
-        audio.play();
-
-        
-        audio.onended = () => {
-            URL.revokeObjectURL(url);
-        };
+resumeBtn.addEventListener("click", () => {
+    // استئناف النص إذا كان متوقفًا مؤقتًا
+    if (speechSynthesis.paused) {
+        speechSynthesis.resume();
     }
+});
+
+pauseBtn.addEventListener("click", () => {
+    // إيقاف مؤقت للنص إذا كان قيد التشغيل
+    if (speechSynthesis.speaking) {
+        speechSynthesis.pause();
+    }
+
+    // إظهار أزرار الاستئناف والإيقاف المؤقت
+    pauseBtn.style.display = "none";
+    resumeBtn.style.display = "block";
 });

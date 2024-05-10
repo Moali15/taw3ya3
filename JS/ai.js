@@ -1,31 +1,33 @@
+const textToConvertInput = document.getElementById('text-to-convert');
+const convertBtn = document.getElementById('convert-btn');
+const downloadBtn = document.getElementById('download-btn');
+const audioElement = document.getElementById('audio');
 
-document.getElementById('convert-btn').addEventListener('click', () => {
-    const text = document.getElementById('text-to-convert').value;
-    if (text.trim() !== '') {
-        
+convertBtn.addEventListener('click', () => {
+    const text = textToConvertInput.value.trim();
+    if (text !== '') {
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'ar-SA'; 
+
+        
         speechSynthesis.speak(utterance);
 
         
-        document.getElementById('download-btn').disabled = false;
+        downloadBtn.disabled = false;
     }
 });
 
-document.getElementById('download-btn').addEventListener('click', () => {
-    const text = document.getElementById('text-to-convert').value;
-    if (text.trim() !== '') {
-        
+downloadBtn.addEventListener('click', () => {
+    const text = textToConvertInput.value.trim();
+    if (text !== '') {
         const blob = new Blob([text], { type: 'audio/mpeg' });
         const url = URL.createObjectURL(blob);
 
-        
-        const audio = document.getElementById('audio');
-        audio.src = url;
-        audio.play();
+        audioElement.src = url;
+        audioElement.play();
 
         
-        audio.onended = () => {
+        audioElement.onended = () => {
             URL.revokeObjectURL(url);
         };
     }

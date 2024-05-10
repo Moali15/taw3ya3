@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Text To Speech Converter</title>
-    <!-- Font Awesome CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    />
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/ai.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>testtt</h1>
-      <div class="controls">
-        <button class="btn" id="resume">
-          <i class="fa-solid fa-play"></i>
-        </button>
-        <button class="btn" id="pause">
-          <i class="fa-solid fa-pause"></i>
-        </button>
-      </div>
-      <textarea
-        placeholder="Enter some text here.."
-        id="txt"
-        rows="6"
-      ></textarea>
-      <button id="submit" type="submit">Submit</button>
-    </div>
-    <!-- Script -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        textarea {
+            width: 80%;
+            height: 150px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            padding: 10px;
+            resize: none;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Text to Speech Demo</h1>
+    <textarea id="text-to-speak" placeholder="Enter text here..."></textarea>
+    <br>
+    <label for="language-select">Select Language:</label>
+    <select id="language-select">
+        <option value="en-US">English</option>
+        <option value="ar-SA">Arabic</option>
+    </select>
+    <br>
+    <button id="speak-btn">Speak</button>
+    <button id="stop-btn">Stop</button>
+
     <script src="JS/ai.js"></script>
-  </body>
+</body>
 </html>

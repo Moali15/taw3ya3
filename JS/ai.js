@@ -1,38 +1,31 @@
-let text = document.getElementById("txt");
+// Get DOM elements
+const textInput = document.getElementById('text-to-speak');
+const languageSelect = document.getElementById('language-select');
+const speakButton = document.getElementById('speak-btn');
+const stopButton = document.getElementById('stop-btn');
 
-let submitBtn = document.getElementById("submit");
-let resumeBtn = document.getElementById("resume");
-let pauseBtn = document.getElementById("pause");
-let audioMessage;
+// Initialize SpeechSynthesisUtterance
+let utterance = new SpeechSynthesisUtterance();
 
-submitBtn.addEventListener("click", () => {
-  //set the text
-  audioMessage.text = text.value;
-  //speak the text
-  window.speechSynthesis.speak(audioMessage);
+// Event listener for Speak button
+speakButton.addEventListener('click', () => {
+    const text = textInput.value.trim();
+    const selectedLanguage = languageSelect.value;
+
+    if (text !== '') {
+        // Set the text to be spoken
+        utterance.text = text;
+        
+        // Set the language
+        utterance.lang = selectedLanguage;
+
+        // Speak the text
+        window.speechSynthesis.speak(utterance);
+    }
 });
 
-resumeBtn.addEventListener("click", () => {
-  pauseBtn.style.display = "block";
-  resumeBtn.style.display = "none";
-  //resume the audio if it is paused
-  if (speechSynthesis.pause) {
-    speechSynthesis.resume();
-  }
+// Event listener for Stop button
+stopButton.addEventListener('click', () => {
+    // Stop speaking
+    window.speechSynthesis.cancel();
 });
-
-pause.addEventListener("click", () => {
-  pauseBtn.style.display = "none";
-  resumeBtn.style.display = "block";
-  //pause if speaking
-  speechSynthesis.speaking ? speechSynthesis.pause() : "";
-});
-
-window.onload = () => {
-  resumeBtn.style.display = "none";
-  if ("speechSynthesis" in window) {
-    audioMessage = new SpeechSynthesisUtterance();
-  } else {
-    alert("Speech Synthese is not supported");
-  }
-};

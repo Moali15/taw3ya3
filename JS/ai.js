@@ -1,44 +1,38 @@
 let text = document.getElementById("txt");
+
 let submitBtn = document.getElementById("submit");
 let resumeBtn = document.getElementById("resume");
 let pauseBtn = document.getElementById("pause");
 let audioMessage;
 
 submitBtn.addEventListener("click", () => {
-    if ("speechSynthesis" in window) {
-        if (!audioMessage) {
-            audioMessage = new SpeechSynthesisUtterance();
-            audioMessage.lang = 'ar-SA'; // تحديد اللغة إلى العربية
-        }
-
-        // تحديد النص للكلام
-        audioMessage.text = text.value;
-
-        // تشغيل النص ككلام
-        window.speechSynthesis.speak(audioMessage);
-
-        // إظهار أزرار الاستئناف والإيقاف المؤقت
-        pauseBtn.style.display = "block";
-        resumeBtn.style.display = "none";
-    } else {
-        alert("Speech Synthesis غير مدعوم في هذا المتصفح");
-    }
+  //set the text
+  audioMessage.text = text.value;
+  //speak the text
+  window.speechSynthesis.speak(audioMessage);
 });
 
 resumeBtn.addEventListener("click", () => {
-    // استئناف النص إذا كان متوقفًا مؤقتًا
-    if (speechSynthesis.paused) {
-        speechSynthesis.resume();
-    }
+  pauseBtn.style.display = "block";
+  resumeBtn.style.display = "none";
+  //resume the audio if it is paused
+  if (speechSynthesis.pause) {
+    speechSynthesis.resume();
+  }
 });
 
-pauseBtn.addEventListener("click", () => {
-    // إيقاف مؤقت للنص إذا كان قيد التشغيل
-    if (speechSynthesis.speaking) {
-        speechSynthesis.pause();
-    }
-
-    // إظهار أزرار الاستئناف والإيقاف المؤقت
-    pauseBtn.style.display = "none";
-    resumeBtn.style.display = "block";
+pause.addEventListener("click", () => {
+  pauseBtn.style.display = "none";
+  resumeBtn.style.display = "block";
+  //pause if speaking
+  speechSynthesis.speaking ? speechSynthesis.pause() : "";
 });
+
+window.onload = () => {
+  resumeBtn.style.display = "none";
+  if ("speechSynthesis" in window) {
+    audioMessage = new SpeechSynthesisUtterance();
+  } else {
+    alert("Speech Synthese is not supported");
+  }
+};

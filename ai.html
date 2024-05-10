@@ -1,65 +1,44 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استمع</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Play:wght@400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Noto+Sans+Arabic&family=Play:wght@400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
-    <!-- csslink -->
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/ai.css">
-    <link rel="shortcut icon" href="images/social-care.png" type="icon" />
+    <title>تحويل النص إلى كلام وصوت</title>
 </head>
 <body>
-    <!-- Start Header -->
-   <nav>
-    <div class="header" id="header">
-      <div class="container">
-        <a href="#" class="logo ">وعى .</a>
-        <ul class="main-nav">
-          <li><a href="index.html">الرئيسيه</a></li>
-          <li><a href="index.html">عننا</a></li>
-          <li><a href="article.html">مقالات</a></li>
-          <li><a href="video.html">ارشادات</a></li>
-          <li><a href="story.html">قصه داعمه</a></li>
-          <li><a href="#footer">تواصل معنا</a></li>
-        </ul>
-      </div>
-    </div>
-    </nav>
-    <div class="cont">
-        <h1>وعى .</h1>
-        <textarea id="text-to-convert" placeholder="اكتب النص :"></textarea>
-        <button id="convert-btn">أضغط هنا للتحويل</button>
-        <audio id="audio"></audio>
-    </div>
+    <textarea id="text-to-convert" placeholder="أدخل النص هنا..." style="width: 90%; height: 100px;"></textarea>
+    <br>
+    <button id="convert-btn">تحويل إلى كلام وصوت</button>
 
-     <!-- footer start=========== -->
-  <footer id="footer" class="">
-    <div class="w-50 m-auto d-flex flex-wrap text-center gap-4  justify-content-center align-item-center">
-      <h2 class="">تواصل معنا :</h2>
-    </div>
-    <div class="contact w-100  px-5">
-      <form action="" class="">
-        <div class="d-flex gap-5">
-        <input class="form-control my-3" type="text" name='email' placeholder='الايميل'>
-        <input class="form-control my-3 " type="number" name='phone' placeholder='الهاتف'>
-      </div>
-      <textarea class="form-control" name="textarea" rows="3" cols="30" placeholder="تواصل معنا"></textarea>
-      </form>
-    </div>
-      <div class="mt-5 footerIcons m-0  w-100 d-flex gap-3 justify-content-center fs-4 text-white">
-        <a href="https://www.facebook.com/profile.php?id=61558354317161&mibextid=ZbWKwL" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-        <a href=""><i class="fa-brands fa-twitter"></i></a>
-        <a href=""><i class="fa-brands fa-instagram"></i></a>
-        <a href=""><i class="fa-brands fa-snapchat"></i></a>
-        </div>
-    <script src="JS/ai.js"></script>
+    <script>
+        document.getElementById('convert-btn').addEventListener('click', () => {
+            const text = document.getElementById('text-to-convert').value.trim();
+            if (text !== '') {
+                // تحويل النص إلى كلام
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ar-SA'; // تحديد اللغة إلى العربية
+
+                // إعداد الدالة لتشغيل الكلام كصوت
+                utterance.onend = () => {
+                    playSpeechAsAudio(utterance);
+                };
+
+                // تشغيل الكلام
+                speechSynthesis.speak(utterance);
+            }
+        });
+
+        function playSpeechAsAudio(utterance) {
+            const audio = new Audio();
+            const blob = new Blob([new Uint8Array(utterance.audioBuffer)], { type: 'audio/wav' });
+            audio.src = URL.createObjectURL(blob);
+
+            // تشغيل الصوت
+            audio.play()
+                .catch(error => {
+                    console.error('Error playing audio:', error);
+                });
+        }
+    </script>
 </body>
 </html>

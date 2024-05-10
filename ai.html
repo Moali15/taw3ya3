@@ -3,42 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/ai.css">
     <title>Text to Speech Demo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        textarea {
-            width: 80%;
-            height: 150px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            padding: 10px;
-            resize: none;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-    </style>
+    
 </head>
 <body>
-    <h1>Text to Speech Demo</h1>
+  <div class="cont">
+    <h1>وعى .</h1>
     <textarea id="text-to-speak" placeholder="Enter text here..."></textarea>
     <br>
-    <label for="language-select">Select Language:</label>
-    <select id="language-select">
+    <label class="form-label" for="language-select">Select Language:</label>
+    <select class="form-select" id="language-select">
         <option value="en-US">English</option>
         <option value="ar-SA">Arabic</option>
     </select>
     <br>
-    <button id="speak-btn">Speak</button>
-    <button id="stop-btn">Stop</button>
-
+    <button id="speak-btn">تحويل</button>
+    
+  </div>
     <script src="JS/ai.js"></script>
 </body>
 </html>

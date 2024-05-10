@@ -1,38 +1,31 @@
-// Get references to the necessary HTML elements
-const textToConvertInput = document.getElementById('text-to-convert');
-const convertBtn = document.getElementById('convert-btn');
-const downloadBtn = document.getElementById('download-btn');
-const audioElement = document.getElementById('audio');
 
-// Event listener for the convert button
-convertBtn.addEventListener('click', () => {
-    const text = textToConvertInput.value;
+document.getElementById('convert-btn').addEventListener('click', () => {
+    const text = document.getElementById('text-to-convert').value;
     if (text.trim() !== '') {
-        // Create a SpeechSynthesisUtterance object
+        // تحويل النص إلى كلام
         const utterance = new SpeechSynthesisUtterance(text);
-        // Set language to Arabic
-        utterance.lang = 'ar-SA';
-        // Speak the text
+        utterance.lang = 'ar-SA'; // تحديد اللغة إلى العربية
         speechSynthesis.speak(utterance);
-        // Enable download button
-        downloadBtn.disabled = false;
+
+        // تمكين زر التحميل
+        document.getElementById('download-btn').disabled = false;
     }
 });
 
-// Event listener for the download button
-downloadBtn.addEventListener('click', () => {
-    const text = textToConvertInput.value;
+document.getElementById('download-btn').addEventListener('click', () => {
+    const text = document.getElementById('text-to-convert').value;
     if (text.trim() !== '') {
-        // Create a new Blob object containing the text
+        // إنشاء ملف صوتي
         const blob = new Blob([text], { type: 'audio/mpeg' });
-        // Create a temporary URL for the Blob
         const url = URL.createObjectURL(blob);
-        // Set the URL as the audio source
-        audioElement.src = url;
-        // Automatically start downloading the audio file
-        audioElement.play();
-        // Revoke the URL after the audio has finished playing
-        audioElement.onended = () => {
+
+        // تشغيل الصوت
+        const audio = document.getElementById('audio');
+        audio.src = url;
+        audio.play();
+
+        // إلغاء الرابط بعد انتهاء تشغيل الصوت
+        audio.onended = () => {
             URL.revokeObjectURL(url);
         };
     }
